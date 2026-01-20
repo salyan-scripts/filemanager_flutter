@@ -1,4 +1,4 @@
-# Flutter
+# Flutter / Dart
 .dart_tool/
 .packages
 .pub-cache/
@@ -7,12 +7,12 @@ build/
 # Android
 android/.gradle/
 android/local.properties
-*.keystore
-*.jks
+android/key.properties
+android/app/*.keystore
 
 # IDE
 .idea/
 .vscode/
 
-# Shell scripts (NUNCA versionar)
+# Scripts pessoais
 *.sh

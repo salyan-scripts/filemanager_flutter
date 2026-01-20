@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
 
 android {
     namespace "com.salyan.filemanager"
@@ -9,17 +13,16 @@ android {
         minSdk 26
         targetSdk 34
         versionCode 1
-        versionName "0.1"
-        ndk {
-            abiFilters "armeabi-v7a"
-        }
+        versionName "1.0"
     }
 
     buildTypes {
-        debug {
-            debuggable true
+        release {
+            signingConfig signingConfigs.debug
         }
     }
 }
 
-dependencies {}
+flutter {
+    source "../.."
+}
