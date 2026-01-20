@@ -1,18 +1,4 @@
-# Flutter / Dart
-.dart_tool/
-.packages
-.pub-cache/
-build/
-
-# Android
-android/.gradle/
-android/local.properties
-android/key.properties
-android/app/*.keystore
-
-# IDE
-.idea/
-.vscode/
-
-# Scripts pessoais
 *.sh
+/build/
+/.dart_tool/
+/.flutter-plugins*
