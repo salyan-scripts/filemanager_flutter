@@ -1,0 +1,29 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: stable
+          architecture: x64
+
+      - run: flutter pub get
+      - run: flutter build apk --debug --split-per-abi
+
+      - run: |
+          mkdir out
+          cp build/app/outputs/flutter-apk/app-armeabi-v7a-debug.apk out/SalyanFileManager-debug.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SalyanFileManager-debug
+          path: out/SalyanFileManager-debug.apk

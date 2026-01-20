@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace "com.salyan.filemanager"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.salyan.filemanager"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "0.1"
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+    }
+}
+
+dependencies {}
