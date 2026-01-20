@@ -1,36 +1,32 @@
-name: Android CI
+name: Build APK (Debug)
 
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.3'
-          channel: stable
-          architecture: x64
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 3.22.3
 
-      - name: Flutter pub get
-        run: flutter pub get
+    - name: Bootstrap Flutter project
+      run: |
+        if [ -f .ci_bootstrap ]; then
+          flutter create .
+          rm .ci_bootstrap
+        fi
 
-      - name: Build APK debug (ARMv7)
-        run: flutter build apk --debug --split-per-abi
+    - run: flutter pub get
+    - run: flutter build apk --debug --split-per-abi
 
-      - name: Prepare artifact
-        run: |
-          mkdir -p out
-          cp build/app/outputs/flutter-apk/app-armeabi-v7a-debug.apk out/SalyanFileManager-debug.apk
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: SalyanFileManager-debug
-          path: out/SalyanFileManager-debug.apk
+    - uses: actions/upload-artifact@v4
+      with:
+        name: SalyanFileManager-debug.apk
+        path: build/app/outputs/flutter-apk/*.apk
 
